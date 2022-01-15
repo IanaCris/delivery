@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthenticateClientService } from './service/authenticateClient.service';
 import { CreateClientService } from './service/createClient.service';
 
 @Module({
@@ -8,7 +9,8 @@ import { CreateClientService } from './service/createClient.service';
   controllers: [AppController],
   providers: [
     AppService,
-    CreateClientService
+    CreateClientService,
+    AuthenticateClientService
   ],
 })
 export class AppModule {}

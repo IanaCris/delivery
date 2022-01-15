@@ -3,14 +3,14 @@ import { compare } from "bcrypt";
 import { Injectable } from '@nestjs/common';
 import { sign } from "jsonwebtoken";
 
-interface IAutheticateClient {
+interface IAuthenticateClient {
   username: string;
   password: string;
 }
 
 @Injectable()
-export class AutheticateUserService {
-  async execute({ username, password }: IAutheticateClient) {
+export class AuthenticateClientService {
+  async execute({ username, password }: IAuthenticateClient) {
     
     //verificar se username cadastrado
     const client = await prisma.clients.findFirst({
