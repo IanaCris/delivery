@@ -20,14 +20,14 @@ export class AuthenticateClientService {
     });
 
     if(!client) {
-      throw new Error("Username or password invalid!");
+      throw new Error("Username or password invalid1!");
     }
     
     //verificar se senha corresponde ao username
     const passwordMatch = await compare(password, client.password)
 
     if(!passwordMatch) {
-      throw new Error("Username or password invalid!");
+      throw new Error("Username or password invalid2!");
     }
 
     //gerar o token
