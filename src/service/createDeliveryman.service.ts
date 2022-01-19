@@ -2,16 +2,15 @@ import { prisma } from '../database/prismaClient';
 import { hash } from "bcrypt";
 import { Injectable } from '@nestjs/common';
 
-interface ICreateClient {
+interface ICreateDeliveryman {
   username: string;
   password: string;
 }
 
 @Injectable()
-export class CreateClientService {
-  async execute({ username, password }: ICreateClient) {
-    //validar o client exists
-    const clientExist = await prisma.clients.findFirst({
+export class CreateDeliverymanService {
+  async execute({ username, password }: ICreateDeliveryman) {
+    const deliverymanExist = await prisma.deliveryman.findFirst({
       where: {
         username: {
           mode: "insensitive",
@@ -19,21 +18,19 @@ export class CreateClientService {
       },
     });
 
-    if (clientExist) {
-      throw new Error('Client already exists');
+    if (deliverymanExist) {
+      throw new Error('Deliveryman already exists');
     }
 
-    //criptografar a senha
     const hashPassword = await hash(password, 10);
 
-    //salvar o client
-    const client = await prisma.clients.create({
+    const deliveryman = await prisma.deliveryman.create({
       data: {
         username,
         password: hashPassword,
       }
     });
 
-    return client;
+    return deliveryman;
   }
 }
