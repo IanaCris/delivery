@@ -1,7 +1,9 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { AuthenticateClientService } from './service/authenticateClient.service';
 import { AuthenticateDeliverymanService } from './service/authenticateDeliverymanservice';
 import { CreateClientService } from './service/createClient.service';
+import { CreateDeliveryService } from './service/createDelivery.service';
 import { CreateDeliverymanService } from './service/createDeliveryman.service';
 
 interface CreateClientDto {
@@ -16,6 +18,7 @@ export class AppController {
     private readonly authenticateClient: AuthenticateClientService,
     private readonly createDeliveryman: CreateDeliverymanService,
     private readonly authenticateDeliveryman: AuthenticateDeliverymanService,
+    private readonly createDelivery: CreateDeliveryService,
   ) {}
 
   @Post("client")
@@ -31,14 +34,20 @@ export class AppController {
   }
 
   @Post("client/authenticate")
-  async authenticateClientNow(@Body() { username, password }: CreateClientDto): Promise<string> {
-    console.log({ username, password });
-    return await this.authenticateClient.execute({ username, password });
+  async authenticateClientNow(@Res() response: Response, @Body() { username, password }: CreateClientDto): Promise<any> {     
+    const token = await this.authenticateClient.execute({ username, password });
+    return response.status(200).json(token);
   }
 
   @Post("deliveryman/authenticate")
-  async authenticate(@Body() { username, password }: CreateClientDto): Promise<string> {
-    console.log({ username, password });
-    return await this.authenticateDeliveryman.execute({ username, password });
+  async authenticate(@Res() response: Response, @Body() { username, password }: CreateClientDto): Promise<any> {
+    const token = await this.authenticateDeliveryman.execute({ username, password });    
+    return response.status(200).json(token);
+  }
+
+  @Post("delivery")
+  async createDeliveryNow(@Res() response: Response, @Body() item_name: string, id_client: string ): Promise<any> {
+    const delivery = await this.createDelivery.execute({ item_name, id_client });
+    return response.status(200).json(delivery);
   }
 }
