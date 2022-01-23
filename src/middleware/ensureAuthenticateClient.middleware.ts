@@ -2,6 +2,10 @@ import { Injectable, NestMiddleware } from "@nestjs/common";
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
+interface IPayload {
+  sub:string;
+}
+
 @Injectable()
 export class EnsureAuthenticateClientMiddleware implements NestMiddleware {
   use(request: Request, response: Response, next: NextFunction) {
@@ -16,8 +20,10 @@ export class EnsureAuthenticateClientMiddleware implements NestMiddleware {
     const [,token] = authHeader.split(" ");
 
     try {
-      const { sub } = verify(token, "1e0fb489cc4e23e43adde0c56c2bc2b0");
+      const { sub } = verify(token, "1e0fb489cc4e23e43adde0c56c2bc2b0") as IPayload;
       console.log(sub);
+
+      request.client_id = sub;
 
       return next();
     } catch (err) {
