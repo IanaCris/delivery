@@ -21,9 +21,8 @@ export class EnsureAuthenticateClientMiddleware implements NestMiddleware {
 
     try {
       const { sub } = verify(token, "1e0fb489cc4e23e43adde0c56c2bc2b0") as IPayload;
-      console.log(sub);
-
-      request.client_id = sub;
+      
+      request.id_client = sub;
 
       return next();
     } catch (err) {
