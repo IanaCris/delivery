@@ -1,5 +1,5 @@
-import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { AuthenticateClientService } from './service/authenticateClient.service';
 import { AuthenticateDeliverymanService } from './service/authenticateDeliverymanservice';
 import { CreateClientService } from './service/createClient.service';
@@ -46,7 +46,8 @@ export class AppController {
   }
 
   @Post("delivery")
-  async createDeliveryNow(@Res() response: Response, @Body() item_name: string, id_client: string ): Promise<any> {
+  async createDeliveryNow(@Req() request: Request, @Res() response: Response, @Body() item_name: string ): Promise<any> {
+    const { id_client } = request;
     const delivery = await this.createDelivery.execute({ item_name, id_client });
     return response.status(200).json(delivery);
   }
