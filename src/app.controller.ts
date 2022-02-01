@@ -46,9 +46,9 @@ export class AppController {
   }
 
   @Post("delivery")
-  async createDeliveryNow(@Req() request: Request, @Res() response: Response, @Body() item_name: string ): Promise<any> {
+  async createDeliveryNow(@Req() request: Request, @Res() response: Response, @Body() bodyRequest: ICreateDeliveryDTO ): Promise<any> {
     const { id_client } = request;
-    const delivery = await this.createDelivery.execute({ item_name, id_client });
+    const delivery = await this.createDelivery.execute({ item_name: bodyRequest.item_name, id_client });
     return response.status(200).json(delivery);
   }
 }
