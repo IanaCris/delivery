@@ -6,6 +6,7 @@ import { AuthenticateDeliverymanService } from './service/authenticateDeliveryma
 import { CreateClientService } from './service/createClient.service';
 import { CreateDeliveryService } from './service/createDelivery.service';
 import { CreateDeliverymanService } from './service/createDeliveryman.service';
+import { FindAllDeliveryAvailable } from './service/findAllDeliveryAvailable.service';
 
 @Module({
   imports: [],
@@ -16,6 +17,7 @@ import { CreateDeliverymanService } from './service/createDeliveryman.service';
     CreateDeliverymanService,
     AuthenticateDeliverymanService,
     CreateDeliveryService,
+    FindAllDeliveryAvailable,
   ],
 })
 export class AppModule implements NestModule {
