@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AuthenticateClientService } from './service/authenticateClient.service';
-import { AuthenticateDeliverymanService } from './service/authenticateDeliverymanservice';
+import { AuthenticateDeliverymanService } from './service/authenticateDeliveryman.service';
 import { CreateClientService } from './service/createClient.service';
 import { CreateDeliveryService } from './service/createDelivery.service';
 import { CreateDeliverymanService } from './service/createDeliveryman.service';

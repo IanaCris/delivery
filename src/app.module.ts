@@ -1,8 +1,9 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { EnsureAuthenticateClientMiddleware } from './middleware/ensureAuthenticateClient.middleware';
+import { EnsureAuthenticateDeliverymanMiddleware } from './middleware/ensureAuthenticateDeliveryman.middleware';
 import { AuthenticateClientService } from './service/authenticateClient.service';
-import { AuthenticateDeliverymanService } from './service/authenticateDeliverymanservice';
+import { AuthenticateDeliverymanService } from './service/authenticateDeliveryman.service';
 import { CreateClientService } from './service/createClient.service';
 import { CreateDeliveryService } from './service/createDelivery.service';
 import { CreateDeliverymanService } from './service/createDeliveryman.service';
@@ -28,5 +29,8 @@ export class AppModule implements NestModule {
         { path: 'deliveryman/authenticate', method: RequestMethod.POST },
       )
       .forRoutes(AppController);
+      
+      consumer.apply(EnsureAuthenticateDeliverymanMiddleware)
+      .forRoutes({ path: 'delivery/available', method: RequestMethod.GET });
   }
 }
