@@ -27,7 +27,7 @@ export class EnsureAuthenticateDeliverymanMiddleware implements NestMiddleware {
       return next();
     } catch (err) {
       return response.status(410).json({
-        message: "Invalid Token"
+        message: "Invalid Token deliveryman"
       });
     }
     

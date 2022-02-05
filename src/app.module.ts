@@ -28,9 +28,9 @@ export class AppModule implements NestModule {
         { path: 'client/authenticate', method: RequestMethod.POST },
         { path: 'deliveryman/authenticate', method: RequestMethod.POST },
       )
-      .forRoutes(AppController);
+      .forRoutes({ path: 'delivery', method: RequestMethod.POST});
       
       consumer.apply(EnsureAuthenticateDeliverymanMiddleware)
-      .forRoutes({ path: 'delivery/available', method: RequestMethod.GET });
+      .forRoutes({ path: 'delivery/**', method: RequestMethod.GET });
   }
 }
