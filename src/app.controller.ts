@@ -5,6 +5,7 @@ import { AuthenticateDeliverymanService } from './service/authenticateDeliveryma
 import { CreateClientService } from './service/createClient.service';
 import { CreateDeliveryService } from './service/createDelivery.service';
 import { CreateDeliverymanService } from './service/createDeliveryman.service';
+import { FindAllDeliveriesService } from './service/findAllDeliveries.service';
 import { FindAllDeliveryAvailableService } from './service/findAllDeliveryAvailable.service';
 import { UpdateDeliverymanService } from './service/updateDeliveryman.service';
 
@@ -21,8 +22,9 @@ export class AppController {
     private readonly createDeliveryman: CreateDeliverymanService,
     private readonly authenticateDeliveryman: AuthenticateDeliverymanService,
     private readonly createDelivery: CreateDeliveryService,
-    private readonly findAllDeliveries: FindAllDeliveryAvailableService,
+    private readonly findAllDeliveriesAvailable: FindAllDeliveryAvailableService,
     private readonly updateDelivery: UpdateDeliverymanService,
+    private readonly FindAllDeliveriesClient: FindAllDeliveriesService,
   ) {}
 
   @Post("client")
@@ -65,9 +67,17 @@ export class AppController {
     return response.status(200).json(delivery);
   }
   
+  @Get("client/deliveries")
+  async deliveryClient(@Req() request: Request, @Res() response: Response): Promise<any> {
+    const { id_client } = request;
+    const deliveries = await this.FindAllDeliveriesClient.execute(id_client);
+    
+    return response.status(200).json(deliveries);
+  }
+  
   @Get("delivery/available")
   async deliveryAvailable(@Res() response: Response): Promise<any> {
-    const deliveries = await this.findAllDeliveries.execute();
+    const deliveries = await this.findAllDeliveriesAvailable.execute();
     
     return response.status(200).json(deliveries);
   }

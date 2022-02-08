@@ -7,6 +7,7 @@ import { AuthenticateDeliverymanService } from './service/authenticateDeliveryma
 import { CreateClientService } from './service/createClient.service';
 import { CreateDeliveryService } from './service/createDelivery.service';
 import { CreateDeliverymanService } from './service/createDeliveryman.service';
+import { FindAllDeliveriesService } from './service/findAllDeliveries.service';
 import { FindAllDeliveryAvailableService } from './service/findAllDeliveryAvailable.service';
 import { UpdateDeliverymanService } from './service/updateDeliveryman.service';
 
@@ -20,7 +21,8 @@ import { UpdateDeliverymanService } from './service/updateDeliveryman.service';
     AuthenticateDeliverymanService,
     CreateDeliveryService,
     FindAllDeliveryAvailableService,
-    UpdateDeliverymanService
+    UpdateDeliverymanService,
+    FindAllDeliveriesService
   ],
 })
 export class AppModule implements NestModule {
@@ -30,9 +32,17 @@ export class AppModule implements NestModule {
         { path: 'client/authenticate', method: RequestMethod.POST },
         { path: 'deliveryman/authenticate', method: RequestMethod.POST },
       )
-      .forRoutes({ path: 'delivery', method: RequestMethod.POST});
+      .forRoutes(
+        { path: 'client', method: RequestMethod.POST},
+        { path: 'client/deliveries', method: RequestMethod.GET},
+        { path: 'deliveryman', method: RequestMethod.POST},
+        { path: 'delivery', method: RequestMethod.POST},
+      );
       
       consumer.apply(EnsureAuthenticateDeliverymanMiddleware)
-      .forRoutes({ path: 'delivery/**', method: RequestMethod.GET });
+      .forRoutes(
+        { path: 'delivery/**', method: RequestMethod.GET },
+        { path: 'delivery/**', method: RequestMethod.PUT }
+      );
   }
 }
