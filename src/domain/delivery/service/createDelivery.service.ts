@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { prisma } from '../database/prismaClient';
+import { prisma } from "src/database/prismaClient";
 
 interface ICreateDelivery {
   item_name: string;

@@ -1,4 +1,4 @@
-import { prisma } from '../database/prismaClient';
+import { prisma } from "src/database/prismaClient";
 import { hash } from "bcrypt";
 import { Injectable } from '@nestjs/common';
 

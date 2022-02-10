@@ -1,6 +1,6 @@
-import { prisma } from '../database/prismaClient';
 import { hash } from "bcrypt";
 import { Injectable } from '@nestjs/common';
+import { prisma } from "src/database/prismaClient";
 
 interface ICreateClient {
   username: string;

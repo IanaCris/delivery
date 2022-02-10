@@ -1,13 +1,13 @@
 import { Body, Controller, Get, Post, Put, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { AuthenticateClientService } from './service/authenticateClient.service';
-import { AuthenticateDeliverymanService } from './service/authenticateDeliveryman.service';
-import { CreateClientService } from './service/createClient.service';
-import { CreateDeliveryService } from './service/createDelivery.service';
-import { CreateDeliverymanService } from './service/createDeliveryman.service';
-import { FindAllDeliveriesService } from './service/findAllDeliveries.service';
-import { FindAllDeliveryAvailableService } from './service/findAllDeliveryAvailable.service';
-import { UpdateDeliverymanService } from './service/updateDeliveryman.service';
+import { AuthenticateClientService } from './domain/client/service/authenticateClient.service';
+import { CreateClientService } from './domain/client/service/createClient.service';
+import { FindAllDeliveriesService } from './domain/client/service/findAllDeliveries.service';
+import { CreateDeliveryService } from './domain/delivery/service/createDelivery.service';
+import { FindAllDeliveryAvailableService } from './domain/delivery/service/findAllDeliveryAvailable.service';
+import { UpdateDeliverymanService } from './domain/delivery/service/updateDeliveryman.service';
+import { AuthenticateDeliverymanService } from './domain/deliveryman/service/authenticateDeliveryman.service';
+import { CreateDeliverymanService } from './domain/deliveryman/service/createDeliveryman.service';
 
 interface CreateClientDto {
   username: string;

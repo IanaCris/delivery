@@ -1,4 +1,4 @@
-import { prisma } from '../database/prismaClient';
+import { prisma } from "src/database/prismaClient";
 
 interface IUpdateDeliveryman { 
  id_delivery: string;

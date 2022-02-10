@@ -1,7 +1,7 @@
-import { prisma } from '../database/prismaClient';
 import { compare } from "bcrypt";
 import { Injectable } from '@nestjs/common';
 import { sign } from "jsonwebtoken";
+import { prisma } from "src/database/prismaClient";
 
 interface IAuthenticateClient {
   username: string;
