@@ -6,8 +6,10 @@ export class FindAllDeliveriesService {
       where: {
         id: id_client
       }, 
-      include: {
-        Deliveries: true
+      select: {
+        deliveries: true,
+        id: true,
+        username: true
       }
     });
 
