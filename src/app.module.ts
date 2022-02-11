@@ -1,29 +1,16 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AuthenticateClientService } from './domain/client/service/authenticateClient.service';
-import { CreateClientService } from './domain/client/service/createClient.service';
-import { FindAllDeliveriesService } from './domain/client/service/findAllDeliveries.service';
-import { CreateDeliveryService } from './domain/delivery/service/createDelivery.service';
-import { FindAllDeliveryAvailableService } from './domain/delivery/service/findAllDeliveryAvailable.service';
-import { UpdateDeliverymanService } from './domain/delivery/service/updateDeliveryman.service';
-import { AuthenticateDeliverymanService } from './domain/deliveryman/service/authenticateDeliveryman.service';
-import { CreateDeliverymanService } from './domain/deliveryman/service/createDeliveryman.service';
 import { EnsureAuthenticateClientMiddleware } from './middleware/ensureAuthenticateClient.middleware';
 import { EnsureAuthenticateDeliverymanMiddleware } from './middleware/ensureAuthenticateDeliveryman.middleware';
+import { DeliveryModule } from './modules/delivery/delivery.module';
+import { DeliverymanModule } from './modules/deliveryman/deliveryman.module';
+import { ClientModule } from './modules/client/client.module';
 
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [
-    CreateClientService,
-    AuthenticateClientService,
-    CreateDeliverymanService,
-    AuthenticateDeliverymanService,
-    CreateDeliveryService,
-    FindAllDeliveryAvailableService,
-    UpdateDeliverymanService,
-    FindAllDeliveriesService
+  imports: [
+    DeliveryModule,
+    DeliverymanModule,
+    ClientModule,
   ],
 })
 export class AppModule implements NestModule {
