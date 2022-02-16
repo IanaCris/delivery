@@ -18,19 +18,22 @@ export class AppModule implements NestModule {
       consumer.apply(EnsureAuthenticateClientMiddleware)
       .exclude(
         { path: 'client/authenticate', method: RequestMethod.POST },
-        { path: 'deliveryman/authenticate', method: RequestMethod.POST },
       )
       .forRoutes(
-        { path: 'client', method: RequestMethod.POST},
-        { path: 'client/deliveries', method: RequestMethod.GET},
-        { path: 'deliveryman', method: RequestMethod.POST},
+        { path: 'client/**', method: RequestMethod.POST},
+        { path: 'client', method: RequestMethod.GET},
+        { path: 'client/**', method: RequestMethod.GET},
         { path: 'delivery', method: RequestMethod.POST},
       );
       
       consumer.apply(EnsureAuthenticateDeliverymanMiddleware)
+      .exclude(
+        { path: 'deliveryman/authenticate', method: RequestMethod.POST },
+      )
       .forRoutes(
         { path: 'delivery/**', method: RequestMethod.GET },
-        { path: 'delivery/**', method: RequestMethod.PUT }
+        { path: 'delivery/**', method: RequestMethod.PUT },
+        { path: 'deliveryman/**', method: RequestMethod.GET },
       );
   }
 }
